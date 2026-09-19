@@ -39,7 +39,7 @@ jobs:
         run: pnpm install
 
       - name: Approve theme build scripts
-        working-directory: themes/kratos-rebirth
+        working-directory: themes/Kratos-Rebirth
         run: |
           cat <<'EOF' > pnpm-workspace.yaml
           allowBuilds:
@@ -47,11 +47,11 @@ jobs:
           EOF
 
       - name: Install theme dependencies
-        working-directory: themes/kratos-rebirth
+        working-directory: themes/Kratos-Rebirth
         run: pnpm install
 
       - name: Build theme assets
-        working-directory: themes/kratos-rebirth
+        working-directory: themes/Kratos-Rebirth
         run: pnpm run build
 
       - name: Generate site

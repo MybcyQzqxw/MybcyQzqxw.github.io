@@ -7,7 +7,7 @@
 ## 技术栈
 
 - [Hexo](https://hexo.io/) 8.x 静态博客框架
-- [Kratos-Rebirth](https://github.com/Candinya/Kratos-Rebirth) 主题(以 git submodule 引入 `themes/kratos-rebirth`)
+- [Kratos-Rebirth](https://github.com/Candinya/Kratos-Rebirth) 主题(以 git submodule 引入 `themes/Kratos-Rebirth`)
 - [pnpm](https://pnpm.io/) 作为包管理器
 - GitHub Actions + GitHub Pages 自动构建部署
 
@@ -29,7 +29,7 @@ cd MybcyQzqxw.github.io
 pnpm install
 
 # 安装并构建主题
-cd themes/kratos-rebirth
+cd themes/Kratos-Rebirth
 pnpm install
 pnpm run build
 cd ../..
@@ -63,8 +63,8 @@ npx hexo new post "文章标题"
 
 ```
 source/_posts/      # 博客文章(Markdown)
-themes/kratos-rebirth/  # 主题(git submodule)
+themes/Kratos-Rebirth/  # 主题(git submodule)
 _config.yml          # Hexo 站点配置
-_config.kratos-rebirth.yml  # 主题配置
+_config.Kratos-Rebirth.yml  # 主题配置
 public/              # 构建产物(已在 .gitignore 中忽略,无需提交)
 ```
