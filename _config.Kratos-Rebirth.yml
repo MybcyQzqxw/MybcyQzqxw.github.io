@@ -32,8 +32,8 @@ search:
 ################## 样式配置 ##################
 
 image:
-  favicon: ""
-  avatar: "/images/user.svg"
+  favicon: "/favicon.ico"
+  avatar: "/images/avatar.jpg"
   banner: # 首页全屏封面 + 其他页面板块横幅的背景，可填图片路径/URL，也可填纯色（如 #1a1a2e）或渐变色（如 linear-gradient(135deg, #1a1a2e, #16213e)）
     light: ""
     dark: ""
