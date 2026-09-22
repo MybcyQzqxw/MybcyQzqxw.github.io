@@ -2,9 +2,10 @@
 title: PPO
 date: 2026-09-22 00:00:00
 tags:
+  - 强化学习
+  - RL
+  - 理论知识
 ---
-
-# PPO
 
 >近端策略优化（PPO，Proximal Policy Optimization）是强化学习中一种广泛使用且高效的策略梯度方法。本文档旨在对 PPO 的数学推导、核心思想及其 PyTorch 实现进行全面而详细的解释，帮助读者深入理解 PPO 的工作原理和实现细节。
 

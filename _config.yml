@@ -55,6 +55,13 @@ prismjs:
   line_number: true
   tab_replace: ''
 
+# Markdown 渲染（hexo-renderer-markdown-it），使用 KaTeX 插件在构建时渲染数学公式
+markdown:
+  render:
+    html: true
+  plugins:
+    - '@renbaoshuo/markdown-it-katex'
+
 # Home page setting
 # path: Root path for your blogs index page. (default = '')
 # per_page: Posts displayed per page. (0 = disable pagination)

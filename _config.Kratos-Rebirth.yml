@@ -154,7 +154,7 @@ visit_count:
   path_hasher: "md5"
 
 additional_injections:
-  head: ""
+  head: '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.47/dist/katex.min.css">'
   footer: ""
   after_footer: ""
   tools: ""
