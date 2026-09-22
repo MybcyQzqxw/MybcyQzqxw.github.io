@@ -80,7 +80,7 @@ posts:
       options:
         list_number: false
     mobile:
-      enable: true
+      enable: false
       options:
         list_number: true
 
