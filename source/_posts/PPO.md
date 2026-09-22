@@ -14,32 +14,33 @@ toc: true
 
 ## 目录
 
-- 0. 问题设定与记号
-  - 0.1 对策略目标 $J(\theta)$ 的解释
-  - 0.2 对 $p_\theta(\tau)$ 的解释
-- 1. 对 $J(\theta)$ 求导
-  - 1.5. 一个关键恒等式
-- 2. 用逐步奖励 $R_t$ 替换轨迹总奖励 $R(\tau)$（只用未来奖励）
-  - 2.5. 价值函数
-    - 2.5.1. 状态价值函数
-    - 2.5.2. 动作价值函数
-- 3. 用优势函数 $A_t$ 替换逐步回报 $R_t$（引入baseline减少方差）
-- 4. Actor - Critic 网络
-  - 4.5. 对经典目标函数做变换
-- 5. 重要性采样
-  - 5.1. 问题背景
-  - 5.2. 重要性采样原理
-  - 5.3. surrogate objective 的提出
-  - 5.4. surrogate objective 的一阶一致性
-- 6. 信赖域思想（TRPO）
-- 7. 裁剪思想（PPO）与最终损失
-- 8. 估计方法
-  - 8.1. 估计 $\hat A_t$
-    - 8.1.1. 单步 TD 残差（1-step TD）
-    - 8.1.2. 蒙特卡洛回报（full return）
-    - 8.1.3. GAE（Generalized Advantage Estimation）
-  - 8.2. 估计 $R_t$
-- 附：最简 PyTorch 伪代码（批量 + GAE + 标准化 + entropy + grad clip）
+- [目录](#目录)
+- [0. 问题设定与记号](#0-问题设定与记号)
+  - [0.1 对策略目标 $J(\\theta)$ 的解释](#01-对策略目标-jtheta-的解释)
+  - [0.2 对 $p\_\\theta(\\tau)$ 的解释](#02-对-p_thetatau-的解释)
+- [1. 对 $J(\\theta)$ 求导](#1-对-jtheta-求导)
+- [1.5. 一个关键恒等式](#15-一个关键恒等式)
+- [2. 用逐步奖励 $R\_t$ 替换轨迹总奖励 $R(\\tau)$（只用未来奖励）](#2-用逐步奖励-r_t-替换轨迹总奖励-rtau只用未来奖励)
+- [2.5. 价值函数](#25-价值函数)
+  - [2.5.1. 状态价值函数](#251-状态价值函数)
+  - [2.5.2. 动作价值函数](#252-动作价值函数)
+- [3. 用优势函数 $A\_t$ 替换逐步回报 $R\_t$（引入baseline减少方差）](#3-用优势函数-a_t-替换逐步回报-r_t引入baseline减少方差)
+- [4. Actor - Critic 网络](#4-actor---critic-网络)
+- [4.5. 对经典目标函数做变换](#45-对经典目标函数做变换)
+- [5. 重要性采样](#5-重要性采样)
+  - [5.1. 问题背景](#51-问题背景)
+  - [5.2. 重要性采样原理](#52-重要性采样原理)
+  - [5.3. surrogate objective 的提出](#53-surrogate-objective-的提出)
+  - [5.4. surrogate objective 的一阶一致性](#54-surrogate-objective-的一阶一致性)
+- [6. 信赖域思想（TRPO）](#6-信赖域思想trpo)
+- [7. 裁剪思想（PPO）与最终损失](#7-裁剪思想ppo与最终损失)
+- [8. 估计方法](#8-估计方法)
+  - [8.1. 估计 $\\hat A\_t$](#81-估计-hat-a_t)
+    - [8.1.1. 单步 TD 残差（1-step TD）](#811-单步-td-残差1-step-td)
+    - [8.1.2. 蒙特卡洛回报（full return）](#812-蒙特卡洛回报full-return)
+    - [8.1.3. GAE（Generalized Advantage Estimation）](#813-gaegeneralized-advantage-estimation)
+  - [8.2. 估计 $R\_t$](#82-估计-r_t)
+- [附：最简 PyTorch 伪代码（批量 + GAE + 标准化 + entropy + grad clip）](#附最简-pytorch-伪代码批量--gae--标准化--entropy--grad-clip)
 
 ---
 
