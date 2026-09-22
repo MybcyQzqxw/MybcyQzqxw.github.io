@@ -96,10 +96,10 @@ sidebar:
   widgets:
     - about
     - splitter
-    - toc
     - category
     - tagcloud
     - posts
+    - toc
 
 share:
   enable: true
