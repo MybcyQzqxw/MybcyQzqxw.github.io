@@ -1,9 +1,10 @@
 ---
-title: PPO
+title: 强化学习 PPO 的数学推导
 date: 2026-09-22 00:00:00
 tags:
   - 强化学习
   - RL
+  - PPO
   - 理论知识
 toc: true
 ---
