@@ -99,7 +99,20 @@ sidebar:
     - category
     - tagcloud
     - posts
+    - links
     - toc
+  # 个人链接按钮：icon 可填 FontAwesome 4.7 图标 ID（如 github），或自定义 HTML（<img>/<svg>）
+  links:
+    - name: GitHub
+      link: https://github.com/MybcyQzqxw
+      icon: github
+    - name: Email
+      link: mailto:example@example.com
+      icon: envelope
+    # 自定义图片示例：icon: '<img src="/images/xxx.svg" alt="xxx">'（图片放在 source/images/）
+    - name: Bilibili
+      link: https://www.bilibili.com
+      icon: play-circle
 
 share:
   enable: true
