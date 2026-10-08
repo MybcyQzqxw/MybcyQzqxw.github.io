@@ -110,6 +110,9 @@ sidebar:
     - name: Bilibili
       link: https://space.bilibili.com/484422305
       icon: '<img src="/images/bilibili.ico" alt="Bilibili">'
+    - name: 王者荣耀
+      link: https://pvp.qq.com/web202311/gameaccount/index.html
+      icon: '<img src="/images/王者荣耀.png" alt="王者荣耀">'
 
 share:
   enable: true
