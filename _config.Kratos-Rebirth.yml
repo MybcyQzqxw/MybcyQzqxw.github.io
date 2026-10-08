@@ -108,7 +108,7 @@ sidebar:
       icon: github
     # 自定义图片示例：icon: '<img src="/images/xxx.svg" alt="xxx">'（图片放在 source/images/）
     - name: Bilibili
-      link: https://www.bilibili.com
+      link: https://space.bilibili.com/484422305
       icon: '<img src="/images/bilibili.ico" alt="Bilibili">'
 
 share:
