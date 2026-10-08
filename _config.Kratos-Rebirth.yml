@@ -106,13 +106,10 @@ sidebar:
     - name: GitHub
       link: https://github.com/MybcyQzqxw
       icon: github
-    - name: Email
-      link: mailto:example@example.com
-      icon: envelope
     # 自定义图片示例：icon: '<img src="/images/xxx.svg" alt="xxx">'（图片放在 source/images/）
     - name: Bilibili
       link: https://www.bilibili.com
-      icon: play-circle
+      icon: '<img src="/images/bilibili.ico" alt="Bilibili">'
 
 share:
   enable: true
