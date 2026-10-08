@@ -33,7 +33,7 @@ search:
 
 image:
   favicon: "/favicon.ico"
-  avatar: "/images/avatar.jpg"
+  avatar: "/assets/images/avatar.jpg"
   banner: # 首页全屏封面 + 其他页面板块横幅的背景，可填图片路径/URL，也可填纯色（如 #1a1a2e）或渐变色（如 linear-gradient(135deg, #1a1a2e, #16213e)）
     light: ""
     dark: ""
@@ -106,16 +106,16 @@ sidebar:
     - name: GitHub
       link: https://github.com/MybcyQzqxw
       icon: github
-    # 自定义图片示例：icon: '<img src="/images/xxx.svg" alt="xxx">'（图片放在 source/images/）
+    # 自定义图片示例：icon: '<img src="/assets/images/xxx.svg" alt="xxx">'（图片放在 source/assets/images/）
     - name: Bilibili
       link: https://space.bilibili.com/484422305
-      icon: '<img src="/images/bilibili.ico" alt="Bilibili">'
+      icon: '<img src="/assets/images/bilibili.ico" alt="Bilibili">'
     # 二维码按钮：填 qrcode 即可（不需要 link），悬停/点击时弹出二维码
     - name: 微信
-      qrcode: /images/wechat.png
+      qrcode: /assets/images/wechat.png
       icon: wechat
     - name: QQ
-      qrcode: /images/qq.png
+      qrcode: /assets/images/qq.png
       icon: qq
 
 share:
