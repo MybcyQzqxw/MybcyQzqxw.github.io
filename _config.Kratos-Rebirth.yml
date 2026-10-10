@@ -53,6 +53,9 @@ nav:
     - label: 归档
       icon: archive
       url: /archives/
+    - label: 统计
+      icon: bar-chart
+      url: /stats/
 
 index:
   style: "card"
