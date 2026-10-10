@@ -50,7 +50,7 @@ nav:
     - label: 首页
       icon: home
       url: /
-    - label: 归档
+    - label: 仓库
       icon: archive
       url: /archives/
     - label: 统计
