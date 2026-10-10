@@ -173,5 +173,5 @@ visit_count:
 additional_injections:
   head: '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.47/dist/katex.min.css">'
   footer: ""
-  after_footer: ""
+  after_footer: '<script src="/js/post-card-click.js" defer></script>'
   tools: ""
