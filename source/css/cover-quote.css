@@ -1,0 +1,33 @@
+/* 首页封面个性签名：脚本填充完成前先隐藏，避免闪现默认内容 */
+#kr-fullpage-cover .kr-fullpage-cover-content {
+  visibility: hidden;
+  max-width: 800px;
+  width: 100%;
+}
+
+#kr-fullpage-cover .kr-fullpage-cover-content.kr-quote-ready {
+  visibility: visible;
+}
+
+.kr-quote-text {
+  font-size: 36px;
+  line-height: 1.6;
+  letter-spacing: 2px;
+  text-align: center;
+}
+
+.kr-quote-from {
+  margin-top: 24px !important;
+  font-size: 16px;
+  text-align: right;
+}
+
+@media (width < 768px) {
+  .kr-quote-text {
+    font-size: 26px;
+  }
+
+  .kr-quote-from {
+    font-size: 14px;
+  }
+}
