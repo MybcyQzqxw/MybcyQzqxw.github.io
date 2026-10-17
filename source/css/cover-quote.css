@@ -1,7 +1,7 @@
 /* 首页封面个性签名：脚本填充完成前先隐藏，避免闪现默认内容 */
 #kr-fullpage-cover .kr-fullpage-cover-content {
   visibility: hidden;
-  max-width: 800px;
+  max-width: 900px;
   width: 100%;
 }
 
@@ -9,25 +9,34 @@
   visibility: visible;
 }
 
-.kr-quote-text {
-  font-size: 36px;
+/* 需带上父级选择器，才能覆盖主题中 .kr-fullpage-cover-content p 的字号 */
+#kr-fullpage-cover .kr-fullpage-cover-content .kr-quote-text,
+#kr-fullpage-cover .kr-fullpage-cover-content .kr-quote-from {
+  font-family: KaiTi, "楷体", "楷体_GB2312", STKaiti, "华文楷体", "Kaiti SC", "AR PL UKai CN", serif;
+}
+
+#kr-fullpage-cover .kr-fullpage-cover-content .kr-quote-text {
+  font-size: 42px;
   line-height: 1.6;
-  letter-spacing: 2px;
+  letter-spacing: 3px;
   text-align: center;
 }
 
-.kr-quote-from {
-  margin-top: 24px !important;
+#kr-fullpage-cover .kr-fullpage-cover-content .kr-quote-from {
+  margin-top: 28px;
   font-size: 16px;
+  letter-spacing: 1px;
   text-align: right;
 }
 
 @media (width < 768px) {
-  .kr-quote-text {
-    font-size: 26px;
+  #kr-fullpage-cover .kr-fullpage-cover-content .kr-quote-text {
+    font-size: 28px;
+    letter-spacing: 2px;
   }
 
-  .kr-quote-from {
+  #kr-fullpage-cover .kr-fullpage-cover-content .kr-quote-from {
+    margin-top: 20px;
     font-size: 14px;
   }
 }

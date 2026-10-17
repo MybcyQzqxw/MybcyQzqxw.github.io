@@ -30,7 +30,10 @@ const CLIENT_SCRIPT = `(function () {
     box.textContent = "";
     var text = document.createElement("p");
     text.className = "kr-quote-text";
-    text.textContent = q.text;
+    q.text.split("\\n").forEach(function (line, i) {
+      if (i) text.appendChild(document.createElement("br"));
+      text.appendChild(document.createTextNode(line));
+    });
     box.appendChild(text);
     if (q.from) {
       var from = document.createElement("p");
@@ -50,7 +53,7 @@ hexo.extend.generator.register('cover-quote', (locals) => {
   const data = hexo.locals.get('data') || {};
   const quotes = (data.quotes || [])
     .filter((q) => q && q.text)
-    .map((q) => ({ text: String(q.text), from: q.from ? String(q.from) : '' }));
+    .map((q) => ({ text: String(q.text).trim(), from: q.from ? String(q.from) : '' }));
 
   return {
     path: 'js/cover-quote.js',
