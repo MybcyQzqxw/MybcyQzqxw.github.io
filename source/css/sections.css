@@ -74,7 +74,7 @@
   padding: 0 8px;
   border-radius: 4px;
   background: var(--sec, #888);
-  color: #fff;
+  color: #fff !important;
   font-size: 12px;
   font-weight: 400;
   line-height: 20px;

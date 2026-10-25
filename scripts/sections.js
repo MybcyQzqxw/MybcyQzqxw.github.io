@@ -4,7 +4,11 @@ const { escapeHTML } = require('hexo-util');
 
 // 板块 = source/_posts/ 下的一级子目录，名称与颜色在 _config.yml 的 sections 中配置
 const getSections = () =>
-  (hexo.config.sections || []).map((s) => ({ name: String(s.name), color: s.color || '#888888' }));
+  (hexo.config.sections || []).map((s) => ({
+    name: String(s.name),
+    color: s.color || '#888888',
+    centerIntro: !!s.center_intro,
+  }));
 
 const sectionOf = (post) => {
   const parts = String(post.source || '').split('/');

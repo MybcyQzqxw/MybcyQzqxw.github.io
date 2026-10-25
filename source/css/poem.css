@@ -1,0 +1,22 @@
+/* 诗词排版：<poem> 标签（见 scripts/poem.js）与居中的引子 */
+.poem {
+  margin: 1.5em 0;
+  text-align: center;
+  line-height: 2;
+}
+
+.poem p {
+  margin: 0 0 1em;
+}
+
+.poem p:last-child {
+  margin-bottom: 0;
+}
+
+.poem-intro {
+  text-align: center;
+}
+
+.poem-intro p {
+  text-align: center;
+}

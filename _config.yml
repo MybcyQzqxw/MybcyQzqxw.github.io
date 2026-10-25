@@ -86,7 +86,8 @@ sections:
   - name: 作文
     color: '#e8912d'
   - name: 诗词
-    color: '#b455c9'
+    color: '#ec6fa6'
+    center_intro: true # 引子（正文中 <!-- more --> 之前的部分）居中显示
 
 # Category & Tag
 default_category: uncategorized
