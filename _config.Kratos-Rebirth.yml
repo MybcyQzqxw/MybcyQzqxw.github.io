@@ -53,6 +53,9 @@ nav:
     - label: 仓库
       icon: archive
       url: /archives/
+    - label: 合集
+      icon: bookmark
+      url: /collections/
     - label: 统计
       icon: bar-chart
       url: /stats/
@@ -99,7 +102,7 @@ sidebar:
   widgets:
     - about
     - splitter
-    - category
+    - collection
     - tagcloud
     - posts
     - links
@@ -174,7 +177,7 @@ visit_count:
   path_hasher: "md5"
 
 additional_injections:
-  head: '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.47/dist/katex.min.css"><link rel="stylesheet" href="/css/cover-quote.css">'
+  head: '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.47/dist/katex.min.css"><link rel="stylesheet" href="/css/cover-quote.css"><link rel="stylesheet" href="/css/sections.css"><link rel="stylesheet" href="/css/stats.css">'
   footer: ""
   after_footer: '<script src="/js/post-card-click.js" defer></script><script src="/js/nav-scroll-top.js" defer></script><script src="/js/cover-quote.js" defer></script>'
   tools: ""

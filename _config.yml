@@ -14,7 +14,7 @@ timezone: ''
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
 url: https://mybcyqzqxw.github.io
-permalink: posts/:title/
+permalink: posts/:name/
 permalink_defaults:
 pretty_urls:
   trailing_index: true # Set to false to remove trailing 'index.html' from permalinks
@@ -70,6 +70,23 @@ index_generator:
   path: ''
   per_page: 10
   order_by: -date
+
+# 归档页不分页：板块筛选在浏览器端完成，需要一次拿到全部文章
+archive_generator:
+  per_page: 0
+  yearly: true
+  monthly: true
+  daily: false
+  order_by: -date
+
+# 板块：name 必须与 source/_posts/ 下的子目录同名（文章所在子目录即其所属板块）；color 用于统计图与标记
+sections:
+  - name: 学习
+    color: '#2f7fd8'
+  - name: 作文
+    color: '#e8912d'
+  - name: 诗词
+    color: '#b455c9'
 
 # Category & Tag
 default_category: uncategorized

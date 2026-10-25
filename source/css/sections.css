@@ -1,0 +1,86 @@
+/* 板块筛选条与板块标记（颜色由元素上的 --sec 提供） */
+.sec-filter {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 14px;
+}
+
+.sec-chip {
+  display: inline-flex;
+  align-items: center;
+  margin: 0;
+  padding: 3px 14px;
+  border: 1px solid rgba(128, 128, 128, 0.35);
+  border-radius: 999px;
+  background: transparent;
+  color: inherit;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.7;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.sec-chip::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  margin-right: 6px;
+  border-radius: 50%;
+  background: var(--sec, #888);
+}
+
+.sec-chip:hover {
+  border-color: var(--sec, #888);
+}
+
+.sec-chip input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.sec-chip:has(input:checked) {
+  border-color: var(--sec);
+  background: var(--sec);
+  color: #fff;
+}
+
+.sec-chip:has(input:checked)::before {
+  background: #fff;
+}
+
+.sec-chip:has(input:focus-visible) {
+  outline: 2px solid var(--sec);
+  outline-offset: 2px;
+}
+
+.sec-all::before {
+  display: none;
+}
+
+.sec-filter:not(:has(input:checked)) .sec-all {
+  border-color: rgba(128, 128, 128, 0.9);
+  background: rgba(128, 128, 128, 0.9);
+  color: #fff;
+}
+
+.sec-badge {
+  display: inline-block;
+  margin: 0 6px 0 0;
+  padding: 0 8px;
+  border-radius: 4px;
+  background: var(--sec, #888);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 20px;
+  vertical-align: middle;
+}
+
+.posts-collapse .post-title .sec-badge {
+  margin: 0 0 0 8px;
+}
