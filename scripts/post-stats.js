@@ -341,7 +341,7 @@ hexo.extend.generator.register('post-stats', function (locals) {
     path: 'stats/index.html',
     layout: ['page'],
     data: {
-      title: '发布统计',
+      title: '统计',
       type: 'stats',
       content,
       updated: lastDate || now,

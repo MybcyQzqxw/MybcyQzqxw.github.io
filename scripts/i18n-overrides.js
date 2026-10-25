@@ -3,7 +3,9 @@
 // 覆盖主题语言包中的个别文案，避免直接修改主题子模块
 const OVERRIDES = {
   'zh-CN': {
-    'title.archive': '文章仓库',
+    'title.archive': '仓库',
+    'title.tagcloud': '标签',
+    'title.categories_list': '分类',
   },
 };
 
