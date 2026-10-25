@@ -2,14 +2,11 @@
 
 const { escapeHTML } = require('hexo-util');
 
-const SEGMENTS = 4; // 每月分为 4 格，约一周一格
-const SEGMENT_DAYS = 7;
-const SEGMENT_LABEL = '1/4 个月';
+const WEEKDAYS = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'];
+const DAY_MS = 86400000;
 
 const pad = (n) => String(n).padStart(2, '0');
 const monthKey = (y, m) => y * 12 + m;
-const daysIn = (y, m) => new Date(y, m + 1, 0).getDate();
-const segmentOf = (day) => Math.min(Math.floor((day - 1) / SEGMENT_DAYS), SEGMENTS - 1);
 const niceMax = (v) => Math.max(4, Math.ceil(v / 4) * 4);
 
 const STYLE = `
@@ -72,24 +69,52 @@ const STYLE = `
   .kr-stats .tip-l:hover::after { left: 0; transform: none; }
   .kr-stats .tip-r:hover::after { left: auto; right: 0; transform: none; }
 
-  .kr-stats .hm-scroll { overflow-x: visible; }
-  .kr-stats .hm { display: grid; row-gap: 6px; }
-  .kr-stats .hm-row { display: grid; grid-template-columns: 40px 1fr; align-items: center; column-gap: 8px; }
-  .kr-stats .hm-year { font-size: 12px; opacity: 0.7; text-align: right; font-variant-numeric: tabular-nums; }
-  .kr-stats .hm-months { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: 8px; }
-  .kr-stats .hm-month-label { font-size: 11px; opacity: 0.6; text-align: left; line-height: 1.2; }
-  .kr-stats .hm-month { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; }
-  .kr-stats .hm-cell { display: block; aspect-ratio: 1 / 1; border-radius: 3px; background: var(--st-empty); }
-  .kr-stats .hm-cell.future { background: transparent; border: 1px dashed var(--st-border); }
-  .kr-stats .hm-cell.l1 { background: color-mix(in srgb, var(--st-accent) 30%, transparent); }
-  .kr-stats .hm-cell.l2 { background: color-mix(in srgb, var(--st-accent) 52%, transparent); }
-  .kr-stats .hm-cell.l3 { background: color-mix(in srgb, var(--st-accent) 76%, transparent); }
-  .kr-stats .hm-cell.l4 { background: var(--st-accent); }
-  .kr-stats a.hm-cell { cursor: pointer; transition: transform 0.15s ease, box-shadow 0.15s ease; }
-  .kr-stats a.hm-cell:hover { transform: scale(1.25); box-shadow: 0 0 0 1px var(--st-accent); z-index: 2; }
-  .kr-stats .hm-foot { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 6px 16px; margin-top: 14px; font-size: 12px; opacity: 0.75; }
+  /* GitHub 贡献图配色与布局：一列 7 格为一周，周日在最上方 */
+  .kr-stats .hm-wrap {
+    --hm-l0: #ebedf0; --hm-l1: #9be9a8; --hm-l2: #40c463; --hm-l3: #30a14e; --hm-l4: #216e39;
+    --hm-edge: rgba(27, 31, 35, 0.06);
+    --hm-gap: 2px;
+    position: relative;
+  }
+  html[data-theme="dark"] .kr-stats .hm-wrap {
+    --hm-l0: #161b22; --hm-l1: #0e4429; --hm-l2: #006d32; --hm-l3: #26a641; --hm-l4: #39d353;
+    --hm-edge: rgba(255, 255, 255, 0.05);
+  }
+  .kr-stats .hm-radio { position: absolute; opacity: 0; pointer-events: none; width: 0; height: 0; }
+  .kr-stats .hm-panel { display: none; }
+  .kr-stats .hm-head { font-size: 14px; line-height: 32px; margin-bottom: 8px; }
+  /* 格子边长由容器宽度推算，行列均用同一个 --hm-cell，保证标注与格子逐行逐列对齐 */
+  .kr-stats .hm-scroll { container-type: inline-size; }
+  .kr-stats .hm-board {
+    --hm-cell: min(14px, calc((100cqw - 32px - (var(--weeks) - 1) * var(--hm-gap)) / var(--weeks)));
+    display: grid;
+    grid-template-columns: 28px auto;
+    grid-template-rows: 16px auto;
+    column-gap: 4px;
+    row-gap: 4px;
+    width: max-content;
+  }
+  .kr-stats .hm-mlabels, .kr-stats .hm-grid { display: grid; grid-template-columns: repeat(var(--weeks), var(--hm-cell)); column-gap: var(--hm-gap); }
+  .kr-stats .hm-mlabels { font-size: 12px; line-height: 16px; opacity: 0.75; }
+  .kr-stats .hm-mlabels span { grid-row: 1; white-space: nowrap; }
+  .kr-stats .hm-dlabels { display: grid; grid-template-rows: repeat(7, var(--hm-cell)); row-gap: var(--hm-gap); font-size: 11px; opacity: 0.75; }
+  .kr-stats .hm-dlabels span { display: flex; align-items: center; height: var(--hm-cell); line-height: 1; white-space: nowrap; }
+  .kr-stats .hm-grid { grid-template-rows: repeat(7, var(--hm-cell)); grid-auto-flow: column; row-gap: var(--hm-gap); }
+  .kr-stats .hm-cell { display: block; width: var(--hm-cell); height: var(--hm-cell); border-radius: 2px; background: var(--hm-l0); outline: 1px solid var(--hm-edge); outline-offset: -1px; }
+  .kr-stats .hm-cell.hm-none { background: transparent; outline: none; }
+  .kr-stats .hm-cell.l1 { background: var(--hm-l1); }
+  .kr-stats .hm-cell.l2 { background: var(--hm-l2); }
+  .kr-stats .hm-cell.l3 { background: var(--hm-l3); }
+  .kr-stats .hm-cell.l4 { background: var(--hm-l4); }
+  .kr-stats a.hm-cell { cursor: pointer; }
+  .kr-stats a.hm-cell:hover { outline: 1px solid rgba(128, 128, 128, 0.9); outline-offset: 1px; z-index: 2; }
+  .kr-stats .hm-foot { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 6px 16px; margin-top: 10px; padding-left: 32px; font-size: 12px; }
+  .kr-stats .hm-foot > span:first-child { opacity: 0.7; }
   .kr-stats .hm-legend { display: inline-flex; align-items: center; gap: 4px; }
-  .kr-stats .hm-legend .hm-cell { width: 12px; height: 12px; aspect-ratio: auto; }
+  .kr-stats .hm-legend .hm-cell { width: 12px; height: 12px; }
+  .kr-stats .hm-tabs { position: absolute; top: 0; right: 0; display: flex; gap: 4px; }
+  .kr-stats .hm-tabs label { margin: 0; padding: 4px 12px; border-radius: 6px; font-size: 13px; font-weight: 400; line-height: 1.3; text-align: center; cursor: pointer; opacity: 0.85; font-variant-numeric: tabular-nums; }
+  .kr-stats .hm-tabs label:hover { background: var(--st-empty); }
 
   .kr-stats .bars { display: grid; grid-template-columns: repeat(12, 1fr); gap: 6px; align-items: end; }
   .kr-stats .bar-col { display: flex; flex-direction: column; align-items: center; min-width: 0; }
@@ -120,8 +145,10 @@ const STYLE = `
     .kr-stats .st-summary { grid-template-columns: repeat(2, 1fr); }
     .kr-stats .st-num.st-date { font-size: 17px; }
     .kr-stats .st-section { padding: 14px 12px 16px; }
+    .kr-stats .hm-tabs { position: static; flex-wrap: wrap; margin-bottom: 8px; }
+    .kr-stats .hm-head { line-height: 1.5; }
     .kr-stats .hm-scroll { overflow-x: auto; padding-bottom: 6px; }
-    .kr-stats .hm { min-width: 520px; }
+    .kr-stats .hm-board { --hm-cell: 10px; }
     .kr-stats .bars { gap: 3px; }
     .kr-stats .tag-row { grid-template-columns: minmax(60px, 96px) 1fr 24px; column-gap: 8px; }
   }
@@ -138,18 +165,19 @@ hexo.extend.generator.register('post-stats', function (locals) {
   const nowY = now.getFullYear();
   const nowM = now.getMonth();
 
-  // 按月、按 1/4 月分桶
+  // 按月、按日分桶
   const months = new Map();
+  const days = new Map();
   for (const p of posts) {
     const y = p.date.year();
     const m = p.date.month();
     const key = monthKey(y, m);
-    if (!months.has(key)) {
-      months.set(key, { y, m, count: 0, segs: Array.from({ length: SEGMENTS }, () => []) });
-    }
-    const entry = months.get(key);
-    entry.count += 1;
-    entry.segs[segmentOf(p.date.date())].push(p.title);
+    if (!months.has(key)) months.set(key, { y, m, count: 0 });
+    months.get(key).count += 1;
+
+    const dayKey = `${y}-${pad(m + 1)}-${pad(p.date.date())}`;
+    if (!days.has(dayKey)) days.set(dayKey, []);
+    days.get(dayKey).push(p.title);
   }
 
   const total = posts.length;
@@ -157,9 +185,7 @@ hexo.extend.generator.register('post-stats', function (locals) {
   const lastDate = total ? posts[total - 1].date : null;
 
   let maxCell = 1;
-  for (const e of months.values()) {
-    for (const s of e.segs) maxCell = Math.max(maxCell, s.length);
-  }
+  for (const titles of days.values()) maxCell = Math.max(maxCell, titles.length);
 
   // 最长连续活跃月数
   const keys = [...months.keys()].sort((a, b) => a - b);
@@ -183,45 +209,92 @@ hexo.extend.generator.register('post-stats', function (locals) {
   const lastYear = Math.max(nowY, lastDate ? lastDate.year() : nowY);
   const levelOf = (count) => (count ? Math.min(4, Math.ceil((count * 4) / maxCell)) : 0);
 
-  const monthLabels = Array.from({ length: 12 }, (_, m) => `<div class="hm-month-label">${m + 1}月</div>`).join('');
-  let heatRows = `<div class="hm-row"><div class="hm-year"></div><div class="hm-months">${monthLabels}</div></div>`;
+  const today =  Date.UTC(now.getFullYear(), now.getMonth(), now.getDate());
+  const years = [];
+  for (let y = lastYear; y >= firstYear; y--) years.push(y);
+  const currentYear = String(years.includes(nowY) ? nowY : years[0]);
 
-  for (let y = lastYear; y >= firstYear; y--) {
-    let cols = '';
-    for (let m = 0; m < 12; m++) {
-      const entry = months.get(monthKey(y, m));
-      const tipClass = m < 2 ? ' tip-l' : m > 9 ? ' tip-r' : '';
-      let cells = '';
-      for (let s = 0; s < SEGMENTS; s++) {
-        const titles = entry ? entry.segs[s] : [];
+  const panels = years
+    .map((y) => {
+      const jan1 = Date.UTC(y, 0, 1);
+      const dayCount = (Date.UTC(y + 1, 0, 1) - jan1) / DAY_MS;
+      const offset = new Date(jan1).getUTCDay();
+      const weeks = Math.ceil((offset + dayCount) / 7);
+
+      let cells = '<span class="hm-cell hm-none"></span>'.repeat(offset);
+      let yearTotal = 0;
+      let labels = '';
+      let lastLabelWeek = -10;
+      for (let i = 0; i < dayCount; i++) {
+        const t = jan1 + i * DAY_MS;
+        const d = new Date(t);
+        const m = d.getUTCMonth();
+        const day = d.getUTCDate();
+        const week = Math.floor((offset + i) / 7);
+        if (day === 1 && week - lastLabelWeek >= 3) {
+          labels += `<span style="grid-column:${week + 1}">${m + 1}月</span>`;
+          lastLabelWeek = week;
+        }
+        if (t > today) {
+          cells += '<span class="hm-cell hm-none"></span>';
+          continue;
+        }
+        const titles = days.get(`${y}-${pad(m + 1)}-${pad(day)}`) || [];
         const count = titles.length;
-        const from = s * SEGMENT_DAYS + 1;
-        const to = s === SEGMENTS - 1 ? daysIn(y, m) : from + SEGMENT_DAYS - 1;
-        const range = `${y}-${pad(m + 1)}-${pad(from)} ~ ${pad(to)}`;
+        yearTotal += count;
+        const tipClass = week < 4 ? ' tip-l' : week > weeks - 5 ? ' tip-r' : '';
+        const dateText = `${y}年${m + 1}月${day}日`;
         if (count) {
-          const shown = titles.slice(0, 3).map((t) => `· ${t}`);
+          const shown = titles.slice(0, 3).map((title) => `· ${title}`);
           if (titles.length > 3) shown.push(`…等 ${titles.length} 篇`);
-          const tip = escapeHTML(`${range}\n${count} 篇\n${shown.join('\n')}`);
-          cells += `<a class="hm-cell l${levelOf(count)}${tipClass}" href="${root}archives/${y}/${pad(m + 1)}/" data-tip="${tip}" aria-label="${escapeHTML(range)}：${count} 篇"></a>`;
-        } else if (new Date(y, m, from) > now) {
-          cells += '<span class="hm-cell future"></span>';
+          const tip = escapeHTML(`${count} 篇文章 · ${dateText}\n${shown.join('\n')}`);
+          cells += `<a class="hm-cell l${levelOf(count)}${tipClass}" href="${root}archives/${y}/${pad(m + 1)}/" data-tip="${tip}" aria-label="${escapeHTML(dateText)}：${count} 篇"></a>`;
         } else {
-          cells += `<span class="hm-cell${tipClass}" data-tip="${escapeHTML(`${range}\n无文章`)}"></span>`;
+          cells += `<span class="hm-cell${tipClass}" data-tip="${escapeHTML(`无文章 · ${dateText}`)}"></span>`;
         }
       }
-      cols += `<div class="hm-month">${cells}</div>`;
-    }
-    heatRows += `<div class="hm-row"><div class="hm-year">${y}</div><div class="hm-months">${cols}</div></div>`;
-  }
+
+      const dayLabels = WEEKDAYS.map((n, i) => (i % 2 === 1 ? `<span>${n}</span>` : '<span></span>')).join('');
+      return `<div class="hm-panel hm-panel-${y}">
+    <div class="hm-head">${y} 年共发布 <strong>${yearTotal}</strong> 篇文章</div>
+    <div class="hm-scroll"><div class="hm-board" style="--weeks:${weeks}">
+      <div></div>
+      <div class="hm-mlabels">${labels}</div>
+      <div class="hm-dlabels">${dayLabels}</div>
+      <div class="hm-grid">${cells}</div>
+    </div></div>
+  </div>`;
+    })
+    .join('');
+
+  const radios = years
+    .map((y) => `<input class="hm-radio" type="radio" name="hm-year" id="hm-y-${y}" aria-label="${y}"${String(y) === currentYear ? ' checked' : ''}>`)
+    .join('');
+  const tabs = years.map((y) => `<label for="hm-y-${y}">${y}</label>`).join('');
+  const tabStyle = years
+    .map(
+      (y) => `#hm-y-${y}:checked ~ .hm-main .hm-panel-${y} { display: block; }
+  #hm-y-${y}:checked ~ .hm-tabs label[for="hm-y-${y}"] { background: var(--st-accent); color: #fff; opacity: 1; }
+  #hm-y-${y}:focus-visible ~ .hm-tabs label[for="hm-y-${y}"] { outline: 2px solid var(--st-accent); outline-offset: 2px; }`,
+    )
+    .join('\n  ');
 
   const legend = [0, 1, 2, 3, 4].map((l) => `<span class="hm-cell l${l}"></span>`).join('');
   const heatmap = `
 <section class="st-section">
-  <div class="st-title" role="heading" aria-level="3"><i class="fa fa-th"></i>发布热度图<small>每格为 ${SEGMENT_LABEL}（1–7 日、8–14 日、15–21 日、22 日至月底）</small></div>
-  <div class="hm-scroll"><div class="hm">${heatRows}</div></div>
-  <div class="hm-foot">
-    <span>点击有文章的格子可查看当月归档</span>
-    <span class="hm-legend">少 ${legend} 多</span>
+  <div class="st-title" role="heading" aria-level="3"><i class="fa fa-th"></i>发布热度图</div>
+  <style>
+  ${tabStyle}
+  </style>
+  <div class="hm-wrap">
+    ${radios}
+    <div class="hm-tabs">${tabs}</div>
+    <div class="hm-main">${panels}
+      <div class="hm-foot">
+        <span>点击有文章的格子可查看当月归档</span>
+        <span class="hm-legend">少 ${legend} 多</span>
+      </div>
+    </div>
   </div>
 </section>`;
 
