@@ -1,0 +1,6 @@
+# 合集配置：文件名建议与合集名称相同。文章通过 front-matter 中的 collections 字段加入合集：
+#   collections:
+#     - 线性系统理论
+name: 线性系统理论
+description: 线性定常系统的状态空间描述、状态转移矩阵与相关控制理论笔记。
+cover: /assets/collections/线性系统理论.svg
