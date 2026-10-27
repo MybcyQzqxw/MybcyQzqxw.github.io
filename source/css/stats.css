@@ -13,7 +13,7 @@ html[data-theme="dark"] .kr-stats {
   --st-card: rgba(255, 255, 255, 0.06);
   --st-border: rgba(255, 255, 255, 0.16);
   --st-empty: rgba(255, 255, 255, 0.1);
-  --st-tip-bg: rgba(240, 244, 250, 0.96);
+  --st-tip-bg: rgba(250, 240, 245, 0.96);
   --st-tip-fg: #1b1f27;
 }
 .kr-stats div, .kr-stats section { margin: 0; }
@@ -67,7 +67,7 @@ html[data-theme="dark"] .kr-stats {
   position: relative;
 }
 html[data-theme="dark"] .kr-stats .hm-wrap {
-  --hm-l0: #161b22;
+  --hm-l0: #251f24;
   --hm-edge: rgba(255, 255, 255, 0.05);
 }
 .kr-stats .hm-head { font-size: 14px; line-height: 32px; margin-bottom: 8px; }
