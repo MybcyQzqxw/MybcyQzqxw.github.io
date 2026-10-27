@@ -8,7 +8,7 @@ const OVERRIDES = {
     'title.tagcloud': '标签',
     'title.categories_list': '分类',
     'title.collection': '合集',
-    'list_page_count_message.collections': '当前共有 %d 个合集 (゜-゜)つロ 干杯~',
+    'list_page_count_message.collections': '当前共有 %d 个合集',
     'post_meta.collection_in': '合集',
     'post_meta.section': '板块',
   },
