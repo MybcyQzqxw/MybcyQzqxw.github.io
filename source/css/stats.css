@@ -1,6 +1,6 @@
 /* 统计页样式（页面骨架由 scripts/post-stats.js 生成，图表由 js/stats.js 绘制） */
 .kr-stats {
-  --st-accent: #1e8cdb;
+  --st-accent: #ec6fa6;
   --st-card: rgba(128, 128, 128, 0.08);
   --st-border: rgba(128, 128, 128, 0.22);
   --st-empty: rgba(128, 128, 128, 0.16);
@@ -9,7 +9,7 @@
   padding: 0 4px 12px;
 }
 html[data-theme="dark"] .kr-stats {
-  --st-accent: #51aded;
+  --st-accent: #f08db6;
   --st-card: rgba(255, 255, 255, 0.06);
   --st-border: rgba(255, 255, 255, 0.16);
   --st-empty: rgba(255, 255, 255, 0.1);
