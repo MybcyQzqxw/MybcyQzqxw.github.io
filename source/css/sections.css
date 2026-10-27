@@ -78,9 +78,17 @@
   font-size: 12px;
   font-weight: 400;
   line-height: 20px;
-  vertical-align: middle;
+  vertical-align: 0.15em;
 }
 
 .posts-collapse .post-title .sec-badge {
   margin: 0 0 0 8px;
+}
+
+.kratos-entry-header .sec-badge {
+  vertical-align: 4px;
+}
+
+li > .sec-badge {
+  vertical-align: baseline;
 }
