@@ -10,6 +10,7 @@ const OVERRIDES = {
     'title.collection': '合集',
     'list_page_count_message.collections': '当前共有 %d 个合集',
     'post_meta.collection_in': '合集',
+    'post_meta.date': '日期',
     'post_meta.section': '板块',
   },
 };
