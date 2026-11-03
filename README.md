@@ -51,7 +51,7 @@ pnpm run clean    # 清理缓存与生成文件
 npx hexo new post "文章标题"
 ```
 
-新文章会创建在 `source/_posts/` 目录下,使用 Markdown 编写。
+新文章会创建在 `source/_posts/` 目录下,文件名形如 `2026-11-04-文章标题.md`(日期取自创建当天),使用 Markdown 编写。文章文件统一采用 `YYYY-MM-DD-题目.md` 命名,文章配图目录 `source/assets/posts/<板块>/` 下的子文件夹也与文件名(不含 `.md`)保持一致。
 
 ## 部署到 GitHub Pages
 

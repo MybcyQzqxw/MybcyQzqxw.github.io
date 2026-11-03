@@ -4,13 +4,13 @@ const fs = require('fs');
 const path = require('path');
 
 // 文章封面：
-//   1. front-matter 的 cover 写文件名（如 cover.png），图片放在 source/assets/posts/<板块>/<文章名>/ 下，与文章内的插图同目录；
+//   1. front-matter 的 cover 写文件名（如 cover.png），图片放在 source/assets/posts/<板块>/<文章文件名（不含 .md）>/ 下，与文章内的插图同目录；
 //      也可以写以 / 开头的站内绝对路径，或 http(s):// 开头的外链；cover 留空或 false 表示不显示封面。
 //   2. 未指定 cover 时，从主题配置 posts.default_covers 中随机取一张（每次生成站点时重新随机）。
 const EXTERNAL = /^(#|\/\/|http(s)?:)/;
 const warned = new Set();
 
-// 文章 source 形如 _posts/学习/机器人动力学.md → 资源目录 assets/posts/学习/机器人动力学
+// 文章 source 形如 _posts/学习/2024-05-15-机器人动力学.md → 资源目录 assets/posts/学习/2024-05-15-机器人动力学
 const assetDirOf = (post) => {
   const source = String(post.source || '').replace(/\\/g, '/');
   return source.replace(/^_posts\//, '').replace(/\.[^./]+$/, '');
