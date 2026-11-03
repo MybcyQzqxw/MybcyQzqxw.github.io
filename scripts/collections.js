@@ -17,7 +17,7 @@ const normalize = (value) => {
   return [...new Set(list.map((v) => String(v).trim()).filter(Boolean))];
 };
 
-const collectionPath = (name) => `collections/${name.replace(/[\\/]/g, '-')}/`;
+const collectionPath = (name) => `collections/${name.replace(/[《》]/g, '').replace(/[\\/]/g, '-')}/`;
 
 const loadConfigs = () => {
   const dir = path.join(hexo.source_dir, '_collections');
