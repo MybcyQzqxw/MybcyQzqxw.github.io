@@ -26,9 +26,12 @@ hexo.extend.helper.register('section_name', (post) => {
   return s ? s.name : '';
 });
 
-hexo.extend.helper.register('section_badge', (post) => {
+// 徽章可点击：跳转到“作品”页并仅选中该板块（选中逻辑见 source/js/section-preselect.js）
+hexo.extend.helper.register('section_badge', function (post) {
   const s = sectionOf(post);
-  return s ? `<span class="sec-badge" style="--sec:${escapeHTML(s.color)}">${escapeHTML(s.name)}</span>` : '';
+  if (!s) return '';
+  const href = this.url_for(`${hexo.config.archive_dir}/?section=${encodeURIComponent(s.name)}`);
+  return `<a class="sec-badge" style="--sec:${escapeHTML(s.color)}" href="${escapeHTML(href)}">${escapeHTML(s.name)}</a>`;
 });
 
 // 多选筛选条：纯 CSS 实现（未勾选任何板块 = 显示全部；“全部”按钮重置表单），可随 PJAX 一起替换

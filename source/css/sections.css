@@ -92,3 +92,13 @@
 li > .sec-badge {
   vertical-align: baseline;
 }
+
+a.sec-badge {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+a.sec-badge:hover {
+  opacity: 0.85;
+  text-decoration: none;
+}
