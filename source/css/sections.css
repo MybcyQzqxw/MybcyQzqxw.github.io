@@ -99,6 +99,6 @@ a.sec-badge {
 }
 
 a.sec-badge:hover {
-  opacity: 0.85;
+  opacity: 0.2;
   text-decoration: none;
 }
