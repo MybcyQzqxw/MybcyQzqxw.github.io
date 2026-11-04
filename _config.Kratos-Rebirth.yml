@@ -186,5 +186,5 @@ visit_count:
 additional_injections:
   head: '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.47/dist/katex.min.css"><link rel="stylesheet" href="/css/cover-quote.css"><link rel="stylesheet" href="/css/sections.css"><link rel="stylesheet" href="/css/stats.css"><link rel="stylesheet" href="/css/collections.css"><link rel="stylesheet" href="/css/poem.css">'
   footer: ""
-  after_footer: '<script src="/js/post-card-click.js" defer></script><script src="/js/nav-scroll-top.js" defer></script><script src="/js/cover-quote.js" defer></script><script src="/js/section-preselect.js" defer></script>'
+  after_footer: '<script src="/js/post-card-click.js" defer></script><script src="/js/nav-scroll-top.js" defer></script><script src="/js/cover-quote.js" defer></script><script src="/js/section-preselect.js" defer></script><script src="/js/section-all-pages.js" defer></script>'
   tools: ""

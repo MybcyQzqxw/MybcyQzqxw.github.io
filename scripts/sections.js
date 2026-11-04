@@ -42,6 +42,8 @@ hexo.extend.helper.register('section_filter', () => {
   const rules = [
     '#main:has(.sec-filter :checked) [data-section=""] { display: none; }',
     '#main:has(.sec-filter :checked) .arch-year { display: none; }',
+    '#main:has(.sec-filter :checked) .pagination[data-sec-all] { display: none; }',
+    '#main:not(:has(.sec-filter :checked)) [data-sec-extra] { display: none; }',
   ];
   sections.forEach((s, i) => {
     const name = cssString(s.name);
