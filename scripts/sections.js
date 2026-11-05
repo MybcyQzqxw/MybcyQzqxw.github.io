@@ -8,6 +8,7 @@ const getSections = () =>
     name: String(s.name),
     color: s.color || '#888888',
     centerIntro: !!s.center_intro,
+    indent: !!s.indent,
   }));
 
 const sectionOf = (post) => {
@@ -17,6 +18,18 @@ const sectionOf = (post) => {
 };
 
 const cssString = (v) => String(v).replace(/["\\]/g, '\\$&');
+
+// 开启了 indent 的板块：正文外包一层 .section-indent，段落首行缩进两字（样式见 source/css/poem.css）
+hexo.extend.filter.register(
+  'after_post_render',
+  (data) => {
+    if (typeof data.content !== 'string') return data;
+    const section = sectionOf({ source: data.source });
+    if (section && section.indent) data.content = `<div class="section-indent">${data.content}</div>`;
+    return data;
+  },
+  20,
+);
 
 hexo.extend.helper.register('get_sections', getSections);
 hexo.extend.helper.register('post_section', sectionOf);

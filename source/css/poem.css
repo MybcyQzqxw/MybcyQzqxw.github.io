@@ -13,6 +13,17 @@
   margin-bottom: 0;
 }
 
+/* 文章 / 学习：正文段落首行缩进两字（仅作用于正文顶层段落，不影响列表、引用、表格） */
+.section-indent > p {
+  text-indent: 2em;
+}
+
+/* 以公式块或图片开头的段落不缩进 */
+.section-indent > p:has(> .katex-display:first-child),
+.section-indent > p:has(> img:only-child) {
+  text-indent: 0;
+}
+
 .poem-intro {
   text-align: center;
 }
