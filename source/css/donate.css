@@ -1,0 +1,47 @@
+/* 打赏对话框：按收款码（竖版图片）重新排版，去掉二维码外框，卡片尺寸随内容自适应 */
+#kr-donate-modal .kr-modal-content {
+  width: min(340px, calc(100vw - 32px));
+  height: auto;
+  max-height: calc(100vh - 32px);
+  padding: 0;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+}
+
+#kr-donate-modal .kr-modal-header {
+  padding: 0.6rem 0.8rem;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.25);
+}
+
+#kr-donate-modal .kr-modal-body {
+  flex: 0 1 auto;
+  min-height: 0;
+  gap: 0.9rem;
+  padding: 1.1rem 1.4rem 1.4rem;
+  overflow-y: auto;
+}
+
+#kr-donate-modal .kr-donate-message {
+  font-size: 0.95rem;
+  opacity: 0.8;
+}
+
+#kr-donate-modal .kr-donate-qr {
+  width: 100%;
+  height: auto;
+  border: none;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
+}
+
+#kr-donate-modal .kr-donate-qr .kr-donate-placeholder {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+#kr-donate-modal .kr-donate-platforms:not(:has(*)) {
+  display: none;
+}

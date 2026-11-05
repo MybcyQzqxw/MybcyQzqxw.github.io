@@ -141,7 +141,7 @@ donate:
   enable: true
   title: "打赏"
   message: "感谢您的支持"
-  qrcode_placeholder: ""
+  qrcode_placeholder: "/assets/images/pay.png"
   platforms: []
 
 copyright_notice:
@@ -184,7 +184,7 @@ visit_count:
   path_hasher: "md5"
 
 additional_injections:
-  head: '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.47/dist/katex.min.css"><link rel="stylesheet" href="/css/cover-quote.css"><link rel="stylesheet" href="/css/sections.css"><link rel="stylesheet" href="/css/stats.css"><link rel="stylesheet" href="/css/collections.css"><link rel="stylesheet" href="/css/poem.css">'
+  head: '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.47/dist/katex.min.css"><link rel="stylesheet" href="/css/cover-quote.css"><link rel="stylesheet" href="/css/sections.css"><link rel="stylesheet" href="/css/stats.css"><link rel="stylesheet" href="/css/collections.css"><link rel="stylesheet" href="/css/poem.css"><link rel="stylesheet" href="/css/donate.css">'
   footer: ""
   after_footer: '<script src="/js/post-card-click.js" defer></script><script src="/js/nav-scroll-top.js" defer></script><script src="/js/cover-quote.js" defer></script><script src="/js/section-preselect.js" defer></script><script src="/js/section-all-pages.js" defer></script>'
   tools: ""
