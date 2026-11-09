@@ -1,0 +1,66 @@
+/* 暗色模式补丁：主题暗色样式未覆盖到的文字颜色与低对比度部分 */
+html[data-theme="dark"] body {
+  color: #eee;
+}
+
+html[data-theme="dark"] #footer .kratos-copyright,
+html[data-theme="dark"] #footer .kratos-copyright li,
+html[data-theme="dark"] #footer .kratos-copyright span {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+html[data-theme="dark"] .kr-stats .st-num small,
+html[data-theme="dark"] .kr-stats .bar-label em {
+  opacity: 0.9;
+}
+
+html[data-theme="dark"] .kr-stats .hm-tabs button.on {
+  color: #1b1f27;
+}
+
+html[data-theme="dark"] .kratos-page-meta a:not(.sec-badge):not(:hover) {
+  color: #ccc;
+}
+
+html[data-theme="dark"] .kratos-entry-footer .post-actions .donate:not(:hover) {
+  color: #f08db6;
+}
+
+html[data-theme="dark"] .search-demo-tags a {
+  color: #f4a6c8 !important;
+}
+
+html[data-theme="dark"] .alert-info {
+  background-color: #5a3a4b;
+  border-color: #7a566a;
+  color: #eee;
+}
+
+html[data-theme="dark"] .alert-success {
+  background-color: #1d6a3a;
+  border-color: #2a8a50;
+  color: #eee;
+}
+
+html[data-theme="dark"] .alert-warning {
+  background-color: #7a5a14;
+  border-color: #9a7420;
+  color: #eee;
+}
+
+html[data-theme="dark"] .alert-danger {
+  background-color: #8a2f2f;
+  border-color: #aa4444;
+  color: #eee;
+}
+
+html[data-theme="dark"] .page404 .back-index {
+  border-color: #5a3a4b;
+  background-color: #2d2530;
+  color: #ccc;
+}
+
+html[data-theme="dark"] .page404 .back-index:hover {
+  border-color: #f08db6;
+  color: #f08db6;
+}
