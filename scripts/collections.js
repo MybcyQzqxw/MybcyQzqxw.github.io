@@ -9,8 +9,54 @@ const path = require('path');
 // 配置文件示例（文件名建议与合集名称相同）：
 //   name: 线性系统理论
 //   description: 简介
-//   cover: /assets/collections/线性系统理论.svg
+//   cover: /assets/collections/线性系统理论.jpg   # 可选；不写则从下面的默认封面库中随机取一张
 let configs = [];
+
+// 默认封面库：配置文件没有 cover 时使用。每组是一对渐变色（起点、终点），图案统一；
+// 想增加新的颜色，往这里加一行即可，封面图会在生成站点时自动输出到 /images/collection-covers/
+const COVER_PALETTES = {
+  red: ['#c8372d', '#5e1a1a'],
+  pink: ['#d6598f', '#6b2748'],
+  amber: ['#e6b84f', '#7a4a2a'],
+  orange: ['#d98a4e', '#6b3a27'],
+  green: ['#5aa469', '#1f4a33'],
+  teal: ['#3fa7a3', '#174a55'],
+  blue: ['#4f86d6', '#1f3a6b'],
+  violet: ['#8a62d1', '#3d2670'],
+};
+
+const coverSvg = ([from, to]) => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="${from}"/>
+      <stop offset="1" stop-color="${to}"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#g)"/>
+  <g fill="none" stroke="#ffffff" stroke-opacity="0.18" stroke-width="2">
+    <circle cx="640" cy="120" r="150"/>
+    <circle cx="640" cy="120" r="100"/>
+    <circle cx="640" cy="120" r="50"/>
+    <path d="M0 360 C150 300 250 420 400 360 S650 300 800 360"/>
+    <path d="M0 400 C150 340 250 460 400 400 S650 340 800 400"/>
+  </g>
+</svg>
+`;
+
+const coverUrl = (id) => `/images/collection-covers/${id}.svg`;
+
+// 洗牌袋：库里的颜色都用过一轮后才会重复，避免相邻合集撞色；每次生成站点重新随机
+let bag = [];
+const drawDefaultCover = () => {
+  if (!bag.length) {
+    bag = Object.keys(COVER_PALETTES);
+    for (let i = bag.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [bag[i], bag[j]] = [bag[j], bag[i]];
+    }
+  }
+  return coverUrl(bag.pop());
+};
 
 const normalize = (value) => {
   const list = Array.isArray(value) ? value.flat(Infinity) : value == null ? [] : [value];
@@ -22,6 +68,7 @@ const collectionPath = (name) => `collections/${name.replace(/[《》]/g, '').re
 const loadConfigs = () => {
   const dir = path.join(hexo.source_dir, '_collections');
   configs = [];
+  bag = [];
   if (!fs.existsSync(dir)) return;
 
   for (const file of fs.readdirSync(dir).sort((a, b) => a.localeCompare(b, 'zh-CN'))) {
@@ -42,7 +89,7 @@ const loadConfigs = () => {
     configs.push({
       name,
       description: data && data.description ? String(data.description).trim() : '',
-      cover: data && data.cover ? String(data.cover).trim() : '',
+      cover: data && data.cover ? String(data.cover).trim() : drawDefaultCover(),
       path: collectionPath(name),
     });
   }
@@ -60,6 +107,13 @@ const collect = (posts) =>
   }));
 
 hexo.extend.filter.register('before_generate', loadConfigs);
+
+hexo.extend.generator.register('collection-covers', () =>
+  Object.entries(COVER_PALETTES).map(([id, palette]) => ({
+    path: coverUrl(id).replace(/^\//, ''),
+    data: coverSvg(palette),
+  })),
+);
 
 hexo.extend.helper.register('post_collections', (post) => postCollectionNames(post).map(configOf));
 
