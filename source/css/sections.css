@@ -103,3 +103,19 @@ a.sec-badge:hover {
   opacity: 0.8;
   text-decoration: none;
 }
+
+/* 文章页元信息行：文字与链接颜色一致，所有可点击项悬停效果一致 */
+.kratos-page-header ul.kratos-page-meta li a:not(.sec-badge),
+.kratos-page-header ul.kratos-page-meta li a:not(.sec-badge) span {
+  color: inherit;
+  font-size: inherit;
+}
+
+.kratos-page-header ul.kratos-page-meta li a {
+  transition: opacity 0.15s ease;
+}
+
+.kratos-page-header ul.kratos-page-meta li a:hover {
+  opacity: 0.8;
+  text-decoration: none;
+}

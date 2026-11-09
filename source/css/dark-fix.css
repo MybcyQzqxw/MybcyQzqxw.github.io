@@ -18,10 +18,6 @@ html[data-theme="dark"] .kr-stats .hm-tabs button.on {
   color: #1b1f27;
 }
 
-html[data-theme="dark"] .kratos-page-meta a:not(.sec-badge):not(:hover) {
-  color: #ccc;
-}
-
 html[data-theme="dark"] .kratos-entry-footer .post-actions .donate:not(:hover) {
   color: #f08db6;
 }
