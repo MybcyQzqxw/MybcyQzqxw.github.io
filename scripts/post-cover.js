@@ -6,7 +6,8 @@ const path = require('path');
 // 文章封面：
 //   1. front-matter 的 cover 写文件名（如 cover.png），图片放在 source/assets/posts/<板块>/<文章文件名（不含 .md）>/ 下，与文章内的插图同目录；
 //      也可以写以 / 开头的站内绝对路径，或 http(s):// 开头的外链；cover 留空或 false 表示不显示封面。
-//   2. 未指定 cover 时，从主题配置 posts.default_covers 中随机取一张（每次生成站点时重新随机）。
+//   2. cover 写封面库里的颜色名（如 pink），固定使用该颜色；封面库见主题配置 posts.cover_library。
+//   3. 未指定 cover 时，从封面库中随机取一张（每次生成站点时重新随机）。
 const EXTERNAL = /^(#|\/\/|http(s)?:)/;
 const warned = new Set();
 
@@ -16,11 +17,17 @@ const assetDirOf = (post) => {
   return source.replace(/^_posts\//, '').replace(/\.[^./]+$/, '');
 };
 
-const defaultCovers = () => {
+const coverLibrary = () => {
   const posts = (hexo.theme.config && hexo.theme.config.posts) || {};
-  const list = Array.isArray(posts.default_covers) ? posts.default_covers : [];
-  const covers = list.map(String).filter(Boolean);
-  return covers.length ? covers : [posts.default_cover].filter(Boolean);
+  const library = posts.cover_library && typeof posts.cover_library === 'object' ? posts.cover_library : {};
+  return Object.fromEntries(Object.entries(library).filter(([, image]) => image).map(([name, image]) => [name, String(image)]));
+};
+
+const defaultCovers = () => {
+  const covers = Object.values(coverLibrary());
+  if (covers.length) return covers;
+  const posts = (hexo.theme.config && hexo.theme.config.posts) || {};
+  return [posts.default_cover].filter(Boolean);
 };
 
 // 稳定模式用于 og:image 等需要结果可复现的场合
@@ -68,6 +75,8 @@ hexo.extend.helper.register('post_cover', function (post, options = {}) {
 
   if (cover !== undefined) {
     const value = String(cover).trim();
+    const library = coverLibrary();
+    if (Object.prototype.hasOwnProperty.call(library, value)) return this.url_for(library[value]);
     if (EXTERNAL.test(value) || value.startsWith('/')) return this.url_for(value);
 
     const relative = `/assets/posts/${assetDirOf(post)}/${value}`;

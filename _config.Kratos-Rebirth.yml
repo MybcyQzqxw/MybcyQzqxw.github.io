@@ -75,13 +75,14 @@ footer:
 
 posts:
   default_cover: "/images/default.webp"
-  # 文章未指定 cover 时，从下面这些图片中随机选取一张（图片位于主题 source/images/）
-  default_covers:
-    - "/images/default.webp"
-    - "/images/covers/pink.webp"
-    - "/images/covers/green.webp"
-    - "/images/covers/amber.webp"
-    - "/images/covers/violet.webp"
+  # 封面库：key 是颜色名，value 是图片（位于主题 source/images/）。
+  # 文章 front-matter 写 cover: pink 即固定使用该颜色；不写 cover 则从库中随机选取一张
+  cover_library:
+    blue: "/images/covers/blue.webp"
+    pink: "/images/covers/pink.webp"
+    green: "/images/covers/green.webp"
+    amber: "/images/covers/amber.webp"
+    violet: "/images/covers/violet.webp"
   donate: true
   share: true
   word_count:
