@@ -135,7 +135,7 @@ sidebar:
 share:
   enable: true
   title: "分享"
-  message: "分享这篇文章"
+  message: "分享这篇作品"
   platforms: []
 
 donate:
