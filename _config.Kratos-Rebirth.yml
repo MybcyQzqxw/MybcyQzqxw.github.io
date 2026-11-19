@@ -74,15 +74,14 @@ footer:
     additional: []
 
 posts:
-  default_cover: "/images/default.webp"
-  # 封面库：key 是颜色名，value 是图片（位于主题 source/images/）。
-  # 文章 front-matter 写 cover: pink 即固定使用该颜色；不写 cover 则从库中随机选取一张
+  default_cover: "/assets/images/posts_default/cover1.webp"
+  # 封面库：key 是封面名，value 是图片（位于 source/assets/images/posts_default/）。
+  # 文章 front-matter 写 cover: cover1 即固定使用该图片；不写 cover 则从库中随机选取一张
   cover_library:
-    blue: "/images/covers/blue.webp"
-    pink: "/images/covers/pink.webp"
-    green: "/images/covers/green.webp"
-    amber: "/images/covers/amber.webp"
-    violet: "/images/covers/violet.webp"
+    cover1: "/assets/images/posts_default/cover1.webp"
+    cover2: "/assets/images/posts_default/cover2.webp"
+    cover3: "/assets/images/posts_default/cover3.webp"
+    cover4: "/assets/images/posts_default/cover4.webp"
   donate: true
   share: true
   word_count:
@@ -185,7 +184,7 @@ visit_count:
   path_hasher: "md5"
 
 additional_injections:
-  head: '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.47/dist/katex.min.css"><link rel="stylesheet" href="/css/cover-quote.css"><link rel="stylesheet" href="/css/sections.css?v=2"><link rel="stylesheet" href="/css/stats.css"><link rel="stylesheet" href="/css/collections.css"><link rel="stylesheet" href="/css/poem.css"><link rel="stylesheet" href="/css/donate.css"><link rel="stylesheet" href="/css/share.css"><link rel="stylesheet" href="/css/sidebar.css"><link rel="stylesheet" href="/css/dark-fix.css?v=2">'
+  head: '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.47/dist/katex.min.css"><link rel="stylesheet" href="/css/cover-quote.css"><link rel="stylesheet" href="/css/sections.css?v=2"><link rel="stylesheet" href="/css/stats.css"><link rel="stylesheet" href="/css/collections.css"><link rel="stylesheet" href="/css/poem.css"><link rel="stylesheet" href="/css/donate.css"><link rel="stylesheet" href="/css/share.css"><link rel="stylesheet" href="/css/sidebar.css"><link rel="stylesheet" href="/css/post-cover.css"><link rel="stylesheet" href="/css/dark-fix.css?v=2">'
   footer: ""
   after_footer: '<script src="/js/post-card-click.js" defer></script><script src="/js/nav-scroll-top.js" defer></script><script src="/js/cover-quote.js" defer></script><script src="/js/share-copy.js" defer></script><script src="/js/section-preselect.js" defer></script><script src="/js/section-all-pages.js" defer></script>'
   tools: ""

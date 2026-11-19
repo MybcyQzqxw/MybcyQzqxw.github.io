@@ -9,7 +9,7 @@ const path = require('path');
 // 配置文件示例（文件名建议与合集名称相同）：
 //   name: 线性系统理论
 //   description: 简介
-//   cover: /assets/collections/线性系统理论.jpg   # 可选；不写则从下面的默认封面库中随机取一张
+//   cover: /assets/images/collections/线性系统理论.jpg   # 可选；不写则从下面的默认封面库中随机取一张
 let configs = [];
 
 // 默认封面库：配置文件没有 cover 时使用。每组是一对渐变色（起点、终点），图案统一；

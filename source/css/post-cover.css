@@ -1,0 +1,5 @@
+/* 默认封面：宽度缩放到卡片宽度，再从图片顶部开始截取卡片高度 */
+.kratos-entry-thumb img[src*="/assets/images/posts_default/"] {
+  object-fit: cover;
+  object-position: center top;
+}
