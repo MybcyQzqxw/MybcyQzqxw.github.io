@@ -48,3 +48,29 @@
     font-size: 18px;
   }
 }
+
+/* 逐字浮现：动画结束后停在最终状态（fill-mode: forwards），不再变化 */
+#kr-fullpage-cover .kr-quote-char {
+  display: inline-block;
+  opacity: 0;
+  animation: kr-quote-char-in 0.9s ease-out forwards;
+}
+
+@keyframes kr-quote-char-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* 用户往下拉打断动画：直接显示全部文字 */
+#kr-fullpage-cover .kr-quote-skip .kr-quote-char {
+  animation: none;
+  opacity: 1;
+  transform: none;
+}
