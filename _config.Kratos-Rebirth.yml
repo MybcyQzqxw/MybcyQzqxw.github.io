@@ -81,7 +81,6 @@ posts:
     cover1: "/assets/images/posts_default/cover1.webp"
     cover2: "/assets/images/posts_default/cover2.webp"
     cover3: "/assets/images/posts_default/cover3.webp"
-    cover4: "/assets/images/posts_default/cover4.webp"
   donate: true
   share: true
   word_count:
