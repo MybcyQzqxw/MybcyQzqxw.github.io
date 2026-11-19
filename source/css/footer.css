@@ -1,0 +1,10 @@
+/* 页脚：主题把 additional 追加在最后，这里把它提到最上方，形成均匀的三行 */
+#footer .kratos-copyright {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#footer .kratos-copyright > div:last-child {
+  order: -1;
+}
