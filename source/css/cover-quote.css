@@ -12,11 +12,11 @@
 /* 需带上父级选择器，才能覆盖主题中 .kr-fullpage-cover-content p 的字号 */
 #kr-fullpage-cover .kr-fullpage-cover-content .kr-quote-text,
 #kr-fullpage-cover .kr-fullpage-cover-content .kr-quote-from {
-  font-family: STXingkai, "华文行楷", "XingKai SC", "Xingkai SC", KaiTi, "楷体", STKaiti, "华文楷体", "Kaiti SC", serif;
+  font-family: STXinwei, "华文新魏", "STXingkai", "华文行楷", "XingKai SC", KaiTi, "楷体", STKaiti, "华文楷体", "Kaiti SC", serif;
   font-weight: normal;
   color: #fff;
   /* 描边画在文字下层，只向外扩展，不会吃掉笔画 */
-  -webkit-text-stroke: 0.11em #2f3640;
+  -webkit-text-stroke: 0.06em #2f3640;
   paint-order: stroke fill;
   stroke-linejoin: round;
   text-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
