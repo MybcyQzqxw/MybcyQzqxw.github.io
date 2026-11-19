@@ -1,0 +1,6 @@
+/* 侧栏头像背景：按栏宽缩放，并从图片顶部开始截取 */
+#kratos-widget-area .widget.widget-kratos-about .photo-background {
+  background-size: 100% auto;
+  background-position: center top;
+  background-repeat: no-repeat;
+}
