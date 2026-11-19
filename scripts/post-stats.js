@@ -37,7 +37,6 @@ hexo.extend.generator.register('post-stats', function (locals) {
 
   const content = `
 <div class="kr-stats" id="kr-stats">
-  <div class="st-lead">文章发布频率一览（可多选板块，不选即为全部）</div>
   <form class="sec-filter st-filter" onsubmit="return false" aria-label="板块筛选">
     <button type="reset" class="sec-chip sec-all">全部</button>${chips}
   </form>
